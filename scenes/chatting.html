@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Pixie · Просто общение</title>
+<link rel="stylesheet" href="../assets/pixie.css">
+<style>
+  /* Сцена «Просто общение» 1920×1080.
+     Вебка: 1240×698 в точке x 76, y 156. Чат: 420×600 в точке x 1400, y 230. */
+  header { position: absolute; left: 70px; right: 70px; top: 26px; display: flex; align-items: center; gap: 22px; z-index: 2; }
+  header .wings { width: 92px; }
+  header .logo { font-size: 72px; }
+  header .kicker { font-size: 26px; margin-top: 10px; }
+  header .grow { flex: 1; }
+  header .clock { font-size: 28px; }
+  header .clock b { font-family: var(--font-head); }
+
+  .cam  { left: 70px; top: 150px; width: 1252px; height: 710px; }
+  .chat { left: 1370px; top: 150px; width: 480px; height: 710px; --r: 30px; }
+  .chat .head { top: 26px; }
+  .chat .hint { position: absolute; inset: 80px 30px 30px; display: grid; place-items: center; text-align: center; font-size: 20px; color: rgba(255,245,251,.35); border: 2px dashed rgba(180,155,255,.2); border-radius: 18px; }
+
+  .bar { position: absolute; left: 70px; right: 70px; top: 900px; display: flex; gap: 16px; align-items: center; z-index: 2; font-size: 24px; }
+  .bar [data-icon] { width: 24px; height: 24px; color: var(--pink); }
+  .bar .sub [data-icon] { color: var(--lilac); }
+  .bar .don [data-icon] { color: var(--gold); }
+  .bar .grow { flex: 1; }
+  .bar .msg { font-weight: 800; }
+  .forest { height: 150px; }
+</style>
+</head>
+<body class="scene">
+  <div class="sky"><div class="aurora"></div></div>
+  <canvas class="sparkles" data-density="0.00009"></canvas>
+  <div class="forest"></div>
+
+  <header>
+    <div class="wings"></div>
+    <div class="logo" data-c="name">Pixie</div>
+    <div class="kicker" data-c="tagline"></div>
+    <div class="grow"></div>
+    <span class="pill clock"><span class="spark"></span><b data-clock></b></span>
+  </header>
+
+  <div class="frame cam">
+    <div class="inner-glow"></div>
+    <div class="ring"></div>
+    <span class="corner tl spark"></span><span class="corner tr spark"></span>
+    <span class="corner bl spark"></span><span class="corner br spark"></span>
+  </div>
+
+  <div class="frame chat">
+    <div class="fill"></div>
+    <div class="ring"></div>
+    <span class="corner tr spark"></span><span class="corner bl spark"></span>
+    <div class="head"><span class="spark"></span>чат<span class="line"></span></div>
+    <div class="hint">сюда — виджет чата<br>(StreamElements / Streamlabs)</div>
+  </div>
+
+  <div class="bar">
+    <span class="pill"><span data-icon="heart"></span><span class="lbl">фолловер</span><b data-c="latest.follower"></b></span>
+    <span class="pill sub"><span data-icon="star"></span><span class="lbl">саб</span><b data-c="latest.sub"></b></span>
+    <span class="pill don"><span data-icon="gift"></span><span class="lbl">донат</span><b data-c="latest.donate"></b></span>
+    <span class="grow"></span>
+    <span class="msg muted" data-rotate="chatMessages" data-every="9000"></span>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../assets/pixie.js"></script>
+  <script>
+    // ?demochat — пример сообщений вместо подсказки (для превью и презентации)
+    if (Pixie.param('demochat') != null) {
+      const msgs = [['Moonberry', '#ff79c6', 'привет, Пикси! ✦'], ['CozyBunny', '#7cf0d4', 'какой уютный лес 🍄'],
+        ['Starlight_Fox', '#b49bff', 'чай заварен, я готов'], ['Lumi', '#ffd98a', 'крылышки сегодня особенно блестят'],
+        ['NightOwl', '#ffb8e0', 'во что играем?'], ['Moonberry', '#ff79c6', 'обнимашки чату']];
+      const hint = document.querySelector('.chat .hint');
+      hint.style.cssText = 'display:flex;flex-direction:column;justify-content:flex-end;gap:14px;border:0;text-align:left;font-size:22px;color:#fff5fb;place-items:initial';
+      hint.innerHTML = msgs.map(([n, c, t]) => `<div><b style="color:${c}">${n}</b> <span style="opacity:.85">${t}</span></div>`).join('');
+    }
+  </script>
+</body>
+</html>

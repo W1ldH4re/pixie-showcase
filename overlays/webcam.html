@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Pixie · Рамка для вебки</title>
+<link rel="stylesheet" href="../assets/pixie.css">
+<style>
+  /* Отдельная рамка: подстраивается под размер источника в OBS.
+     Камера лежит под рамкой: отступ 70px сверху (место для крылышек) и 40px с остальных сторон.
+     Например, вебка 640×360 → источник 720×470. */
+  .cam { inset: 70px 40px 40px; }
+  .cam .wings { width: 120px; }
+</style>
+</head>
+<body>
+  <canvas class="sparkles" data-density="0.0002" data-scale="0.8"></canvas>
+  <div class="frame cam">
+    <div class="inner-glow"></div>
+    <div class="ring"></div>
+    <span class="corner tl spark"></span><span class="corner tr spark"></span>
+    <span class="corner bl spark"></span><span class="corner br spark"></span>
+    <div class="wings"></div>
+    <div class="pill tag"><span class="logo" data-c="name">Pixie</span></div>
+  </div>
+  <script src="../config.js"></script>
+  <script src="../assets/pixie.js"></script>
+</body>
+</html>

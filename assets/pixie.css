@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Nunito:wght@600;800;900&family=Pacifico&display=swap');
+
+/* ───────── Палитра ───────── */
+:root {
+  --deep:   #0c0618;
+  --night:  #140a26;
+  --night-2:#1f1038;
+  --plum:   #341a57;
+  --pink:   #ff79c6;
+  --rose:   #ffb8e0;
+  --lilac:  #b49bff;
+  --mint:   #7cf0d4;
+  --gold:   #ffd98a;
+  --cream:  #fff5fb;
+
+  --grad: linear-gradient(120deg, var(--pink), var(--lilac) 50%, var(--mint));
+  --glass: rgba(31, 16, 56, .62);
+  --ring: 6px;
+
+  --font-logo: 'Pacifico', cursive;
+  --font-head: 'Comfortaa', 'Nunito', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  font-family: var(--font-body);
+  color: var(--cream);
+  background: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+body.scene { width: 1920px; height: 1080px; background: var(--night); position: relative; }
+
+/* ───────── Небо ───────── */
+.sky {
+  position: absolute; inset: 0; overflow: hidden;
+  background:
+    radial-gradient(900px 600px at 12% 18%, rgba(255,121,198,.22), transparent 62%),
+    radial-gradient(1000px 700px at 88% 28%, rgba(124,240,212,.13), transparent 62%),
+    radial-gradient(1300px 800px at 50% 115%, rgba(180,155,255,.34), transparent 62%),
+    linear-gradient(180deg, #0b0520 0%, #190c31 55%, #2a1450 100%);
+}
+.aurora {
+  position: absolute; inset: -30%;
+  background: conic-gradient(from 200deg at 50% 50%,
+    transparent 0deg, rgba(255,121,198,.13) 50deg, transparent 110deg,
+    rgba(124,240,212,.10) 190deg, transparent 250deg, rgba(180,155,255,.14) 310deg, transparent 360deg);
+  filter: blur(70px);
+  animation: spin 90s linear infinite;
+}
+.moon {
+  position: absolute; width: 150px; height: 150px; border-radius: 50%;
+  box-shadow: inset -34px 14px 0 0 #ffe9bf;
+  filter: drop-shadow(0 0 26px rgba(255,217,138,.55)) drop-shadow(0 0 70px rgba(255,217,138,.25));
+  animation: bob 9s ease-in-out infinite;
+}
+canvas.sparkles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.forest { position: absolute; left: 0; right: 0; bottom: 0; height: 280px; pointer-events: none; }
+.forest svg { width: 100%; height: 100%; display: block; }
+.mush-cap { animation: glow 4s ease-in-out infinite; }
+
+/* ───────── Типографика ───────── */
+.logo {
+  font-family: var(--font-logo);
+  line-height: 1.25;
+  padding: 0 .25em;
+  background: linear-gradient(100deg, #ffe0f2 0%, var(--pink) 28%, var(--lilac) 58%, var(--mint) 85%, #ffe0f2 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 28px rgba(255,121,198,.55)) drop-shadow(0 4px 0 rgba(52,26,87,.8));
+  animation: shimmer 7s ease-in-out infinite alternate;
+}
+.kicker {
+  font-family: var(--font-head); font-weight: 700;
+  text-transform: lowercase; letter-spacing: .18em;
+  color: var(--rose);
+  text-shadow: 0 0 20px rgba(255,121,198,.6);
+}
+.muted { color: rgba(255,245,251,.72); }
+
+/* ───────── Пилюли и стекло ───────── */
+.pill {
+  display: inline-flex; align-items: center; gap: .6em;
+  padding: .55em 1.3em; border-radius: 999px;
+  background: var(--glass);
+  border: 2px solid rgba(255,184,224,.32);
+  box-shadow: 0 0 30px rgba(180,155,255,.22), inset 0 0 18px rgba(255,121,198,.12);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+}
+.pill b { font-weight: 900; color: var(--cream); }
+.pill .lbl { font-family: var(--font-head); font-weight: 700; color: var(--lilac); letter-spacing: .06em; }
+.pill .spark { width: .8em; height: .8em; color: var(--gold); }
+
+.socials { display: flex; gap: 22px; justify-content: center; font-size: 26px; }
+
+/* ───────── Рамка (вебка, чат, карточки) ───────── */
+.frame {
+  position: absolute; --r: 34px;
+  filter: drop-shadow(0 0 16px rgba(255,121,198,.55)) drop-shadow(0 0 46px rgba(180,155,255,.35));
+}
+.frame .ring {
+  position: absolute; inset: 0; border-radius: var(--r); padding: var(--ring);
+  background: linear-gradient(120deg, var(--pink), var(--lilac), var(--mint), var(--lilac), var(--pink));
+  background-size: 300% 300%;
+  animation: flow 10s ease-in-out infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.frame .ring.thin { --ring: 2px; inset: 14px; border-radius: calc(var(--r) - 12px); opacity: .55; animation-direction: reverse; }
+.frame .inner-glow {
+  position: absolute; inset: var(--ring); border-radius: calc(var(--r) - var(--ring));
+  box-shadow: inset 0 0 34px rgba(255,121,198,.35);
+}
+.frame .fill { position: absolute; inset: var(--ring); border-radius: calc(var(--r) - var(--ring)); background: rgba(20,10,38,.72); backdrop-filter: blur(8px); }
+.frame .corner { position: absolute; width: 34px; height: 34px; color: var(--cream); animation: twinkle 3s ease-in-out infinite; }
+.frame .corner.tl { left: -14px; top: -14px; }
+.frame .corner.tr { right: -14px; top: -14px; animation-delay: -.8s; color: var(--gold); }
+.frame .corner.bl { left: -14px; bottom: -14px; animation-delay: -1.6s; color: var(--mint); }
+.frame .corner.br { right: -14px; bottom: -14px; animation-delay: -2.2s; }
+.frame .wings { position: absolute; left: 50%; top: 0; width: 150px; transform: translate(-50%, -58%); }
+.frame .tag {
+  position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 55%);
+  font-size: 30px; padding: .2em 1.1em .3em;
+  background: linear-gradient(180deg, #2b1549, #1a0c30);
+  border: 2px solid rgba(255,184,224,.55);
+}
+.frame .tag .logo { font-size: 38px; filter: drop-shadow(0 0 12px rgba(255,121,198,.6)); padding: 0 .1em; }
+.frame .head {
+  position: absolute; left: 28px; top: 22px; right: 28px;
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-head); font-weight: 700; font-size: 24px; letter-spacing: .14em; color: var(--rose);
+}
+.frame .head .spark { width: 20px; height: 20px; color: var(--gold); }
+.frame .head .line { flex: 1; height: 2px; background: linear-gradient(90deg, rgba(255,184,224,.5), transparent); }
+
+/* ───────── Крылышки ───────── */
+.wings svg { width: 100%; height: auto; display: block; overflow: visible; filter: drop-shadow(0 0 14px rgba(255,121,198,.7)); }
+.wings .wing { transform-origin: 50% 50%; animation: flap 2.6s ease-in-out infinite; }
+.wings .core { animation: twinkle 2.6s ease-in-out infinite; transform-origin: 50% 50%; }
+.spark svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 0 6px currentColor); }
+
+/* ───────── Ротатор фраз ───────── */
+[data-rotate] { transition: opacity .6s ease, transform .6s ease; }
+[data-rotate].out { opacity: 0; transform: translateY(10px); }
+
+/* ───────── Анимации ───────── */
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes bob     { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes shimmer { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@keyframes flow    { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes twinkle { 0%,100% { opacity: 1; transform: scale(1) rotate(0deg); } 50% { opacity: .45; transform: scale(.7) rotate(25deg); } }
+@keyframes flap    { 0%,100% { transform: scaleX(1); } 50% { transform: scaleX(.86) skewY(-2deg); } }
+@keyframes glow    { 0%,100% { opacity: 1; } 50% { opacity: .7; } }
+@keyframes floaty  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }

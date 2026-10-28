@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Pixie · Презентация оформления</title>
+<link rel="stylesheet" href="assets/pixie.css">
+<style>
+  /* Весь дизайн на одном листе 2000px шириной — экспортируется в export/pixie-showcase.png */
+  html, body { overflow: visible; height: auto; }
+  body { width: 2000px; background: var(--deep); position: relative; }
+  .bg { position: absolute; inset: 0; overflow: hidden; z-index: 0;
+    background:
+      radial-gradient(1200px 900px at 10% 4%, rgba(255,121,198,.18), transparent 60%),
+      radial-gradient(1200px 900px at 95% 30%, rgba(124,240,212,.10), transparent 60%),
+      radial-gradient(1400px 1000px at 20% 75%, rgba(180,155,255,.16), transparent 60%),
+      linear-gradient(180deg, #0c0618, #170b2c 50%, #0c0618); }
+  .sheet { position: relative; z-index: 1; padding: 70px 80px 90px; }
+
+  header { display: flex; align-items: center; gap: 26px; margin-bottom: 56px; }
+  header .wings { width: 150px; }
+  header .logo { font-size: 130px; }
+  header .sub { display: flex; flex-direction: column; gap: 10px; }
+  header .kicker { font-size: 34px; }
+  header .muted { font-size: 24px; font-weight: 700; }
+  header .grow { flex: 1; }
+  .swatches { display: flex; gap: 12px; }
+  .swatches i { width: 54px; height: 54px; border-radius: 50%; box-shadow: 0 0 18px currentColor, inset 0 0 0 2px rgba(255,245,251,.35); }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px 40px; }
+  .full { grid-column: 1 / -1; }
+  figure { margin: 0; }
+  figcaption { display: flex; align-items: baseline; gap: 14px; margin-top: 16px; }
+  figcaption b { font-family: var(--font-head); font-size: 28px; color: var(--cream); }
+  figcaption span { font-size: 20px; color: rgba(255,245,251,.6); font-weight: 700; }
+  figcaption .spark { width: 18px; height: 18px; color: var(--gold); align-self: center; }
+
+  .tile { position: relative; overflow: hidden; border-radius: 22px; background: #0b0518;
+    box-shadow: 0 0 0 2px rgba(180,155,255,.28), 0 20px 50px rgba(0,0,0,.45), 0 0 50px rgba(255,121,198,.12); }
+  .tile iframe { position: absolute; border: 0; transform-origin: 0 0; background: transparent; }
+  .tile.game { background:
+      radial-gradient(220px 220px at 78% 22%, rgba(255,250,220,.9), rgba(255,250,220,0) 70%),
+      linear-gradient(180deg, #5b97cf 0%, #a9d4ee 50%, #6e9d54 51%, #3d6a33 75%, #2b4f26 100%); }
+  .tile.game::after { content: ""; position: absolute; left: 8%; right: 30%; top: 33%; height: 18%;
+    background: linear-gradient(180deg, #7d8fb0, #5c6e8c); clip-path: polygon(0 100%, 18% 20%, 32% 70%, 50% 0, 66% 60%, 82% 30%, 100% 100%); opacity: .7; }
+  .tile.dim { background: radial-gradient(circle at 50% 45%, #2a1548, #120822 75%); }
+  .fakecam { position: absolute; z-index: 0; overflow: hidden;
+    background: radial-gradient(circle at 50% 120%, #b57c9c 0 32%, transparent 33%), radial-gradient(circle at 50% 42%, #e6bfcf 0 14%, transparent 15%), linear-gradient(160deg, #6f5a8a, #3e2e57); }
+  .tile iframe { z-index: 1; }
+
+  .stack { display: flex; flex-direction: column; gap: 50px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; padding: 26px; }
+  .panels .p { position: relative; height: 130px; }
+
+  footer { margin-top: 70px; text-align: center; font-size: 24px; color: rgba(255,245,251,.5); font-weight: 700; }
+  footer .logo { font-size: 44px; }
+</style>
+</head>
+<body>
+  <div class="bg"><canvas class="sparkles" data-density="0.00005"></canvas></div>
+  <div class="sheet">
+    <header>
+      <div class="wings"></div>
+      <div class="logo" data-c="name">Pixie</div>
+      <div class="sub">
+        <div class="kicker">оформление стрима</div>
+        <div class="muted">волшебный ночной лес · крылышки, светлячки и светящиеся грибочки</div>
+      </div>
+      <div class="grow"></div>
+      <div class="swatches">
+        <i style="background:#ff79c6;color:#ff79c6"></i><i style="background:#ffb8e0;color:#ffb8e0"></i>
+        <i style="background:#b49bff;color:#b49bff"></i><i style="background:#7cf0d4;color:#7cf0d4"></i>
+        <i style="background:#ffd98a;color:#ffd98a"></i>
+      </div>
+    </header>
+
+    <div class="grid">
+      <figure class="full">
+        <div class="tile" data-src="scenes/starting.html" data-w="1920" data-h="1080"></div>
+        <figcaption><span class="spark"></span><b>Скоро начнём</b><span>таймер обратного отсчёта, летающая пыльца, соцсети</span></figcaption>
+      </figure>
+
+      <figure>
+        <div class="tile" data-src="scenes/chatting.html?demochat" data-w="1920" data-h="1080" data-cam="76,156,1240,698" data-camtop></div>
+        <figcaption><span class="spark"></span><b>Просто общение</b><span>большая вебка и окно чата</span></figcaption>
+      </figure>
+      <figure>
+        <div class="tile game" data-src="overlays/game.html" data-w="1920" data-h="1080" data-cam="46,719,560,315"></div>
+        <figcaption><span class="spark"></span><b>Игровой оверлей</b><span>рамка вебки поверх игры</span></figcaption>
+      </figure>
+
+      <figure>
+        <div class="tile" data-src="scenes/brb.html" data-w="1920" data-h="1080"></div>
+        <figcaption><span class="spark"></span><b>Скоро вернусь</b><span>по экрану летает огонёк-фея</span></figcaption>
+      </figure>
+      <figure>
+        <div class="tile" data-src="scenes/ending.html" data-w="1920" data-h="1080"></div>
+        <figcaption><span class="spark"></span><b>Спасибо за стрим</b><span>и дата следующего эфира</span></figcaption>
+      </figure>
+
+      <figure>
+        <div class="tile dim" data-src="overlays/webcam.html" data-w="720" data-h="470" data-cam="40,70,640,360" data-box="0.5625"></div>
+        <figcaption><span class="spark"></span><b>Рамка для вебки</b><span>с крылышками и подписью</span></figcaption>
+      </figure>
+      <figure>
+        <div class="tile game" data-src="alerts/alert.html?type=sub&amp;name=Starlight_Fox&amp;amount=6" data-w="1000" data-h="700" data-box="0.5625"></div>
+        <figcaption><span class="spark"></span><b>Алерты</b><span>фолловер · подписка · донат · рейд</span></figcaption>
+      </figure>
+
+      <div class="stack">
+        <figure>
+          <div class="tile" data-src="panels/banner.html" data-w="1200" data-h="480"></div>
+          <figcaption><span class="spark"></span><b>Баннер профиля</b><span>1200×480</span></figcaption>
+        </figure>
+        <figure>
+          <div class="tile dim panels" id="panels"></div>
+          <figcaption><span class="spark"></span><b>Панели под стримом</b></figcaption>
+        </figure>
+      </div>
+      <figure>
+        <div class="tile dim" data-src="panels/panel.html?schedule" data-w="320" data-h="300" data-box="1.18"></div>
+        <figcaption><span class="spark"></span><b>Расписание</b><span>карточка для панели</span></figcaption>
+      </figure>
+    </div>
+
+    <footer><span class="logo" data-c="name">Pixie</span><br>сцены, оверлеи, алерты и оформление канала Twitch</footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script>
+    // панели: по одному iframe на каждую
+    document.getElementById('panels').innerHTML = (window.PIXIE_CONFIG.panels || [])
+      .map((_, i) => `<div class="p" data-src="panels/panel.html?i=${i}" data-w="320" data-h="100" data-pad="0"></div>`).join('');
+
+    // каждый тайл: iframe нужного размера, вписанный по центру; data-box — соотношение высоты к ширине тайла
+    function place(el) {
+      const W = +el.dataset.w, H = +el.dataset.h;
+      const tw = el.clientWidth;
+      const box = el.dataset.box ? +el.dataset.box : H / W;
+      if (!el.classList.contains('p')) el.style.height = Math.round(tw * box) + 'px';
+      const th = el.clientHeight;
+      const pad = el.dataset.box ? 30 : 0;
+      const s = Math.min((tw - pad * 2) / W, (th - pad * 2) / H);
+      const ox = (tw - W * s) / 2, oy = (th - H * s) / 2;
+      if (el.dataset.cam) {
+        const [x, y, w, h] = el.dataset.cam.split(',').map(Number);
+        const cam = document.createElement('div'); cam.className = 'fakecam';
+        Object.assign(cam.style, { left: ox + x * s + 'px', top: oy + y * s + 'px', width: w * s + 'px', height: h * s + 'px' });
+        // в непрозрачной сцене камера в OBS лежит поверх сцены
+        if ('camtop' in el.dataset) { cam.style.zIndex = 2; cam.style.borderRadius = 26 * s + 'px'; }
+        el.appendChild(cam);
+      }
+      const f = document.createElement('iframe');
+      f.src = el.dataset.src; f.width = W; f.height = H; f.setAttribute('scrolling', 'no');
+      f.style.left = ox + 'px'; f.style.top = oy + 'px'; f.style.transform = `scale(${s})`;
+      el.appendChild(f);
+    }
+    document.querySelectorAll('[data-src]').forEach(place);
+    // высота листа — для экспорта картинки ровно по содержимому
+    const setHeight = () => { document.documentElement.dataset.height = document.querySelector('.sheet').offsetHeight; };
+    setHeight(); document.fonts.ready.then(setHeight); addEventListener('load', setHeight);
+  </script>
+  <script src="assets/pixie.js"></script>
+</body>
+</html>

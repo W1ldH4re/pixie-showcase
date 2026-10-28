@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Pixie · Скоро начнём</title>
+<link rel="stylesheet" href="../assets/pixie.css">
+<style>
+  .stage { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 120px; text-align: center; }
+  .stage .wings { width: 260px; margin-bottom: -40px; animation: floaty 5s ease-in-out infinite; }
+  .stage .logo { font-size: 230px; }
+  .stage .kicker { font-size: 46px; margin-top: -10px; }
+  .timer {
+    margin-top: 44px; font-size: 92px; padding: .18em 1em .22em;
+    font-family: var(--font-head); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .06em;
+    border-width: 3px; border-color: rgba(255,184,224,.5);
+  }
+  .timer.done { font-size: 64px; color: var(--gold); }
+  .msg { margin-top: 34px; font-size: 34px; font-weight: 800; min-height: 1.4em; }
+  .socials { position: absolute; left: 0; right: 0; bottom: 64px; z-index: 2; }
+</style>
+</head>
+<body class="scene">
+  <div class="sky"><div class="aurora"></div></div>
+  <div class="moon" style="top:90px; right:190px"></div>
+  <canvas class="sparkles" data-density="0.00014"></canvas>
+  <div class="forest"></div>
+
+  <main class="stage">
+    <div class="wings"></div>
+    <div class="logo" data-c="name">Pixie</div>
+    <div class="kicker">стрим скоро начнётся</div>
+    <div class="pill timer" data-countdown data-done="уже начинаем!">05:00</div>
+    <div class="msg muted" data-rotate="startingMessages"></div>
+  </main>
+
+  <div class="socials" data-socials></div>
+
+  <script src="../config.js"></script>
+  <script src="../assets/pixie.js"></script>
+</body>
+</html>

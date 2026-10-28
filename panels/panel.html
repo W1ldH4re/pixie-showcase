@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Pixie · Панель Twitch</title>
+<link rel="stylesheet" href="../assets/pixie.css">
+<style>
+  /* Заголовок панели под стримом: 320×100 (экспортируется в 640×200 для чёткости).
+     panel.html?i=0..5 — панели из config.js, panel.html?schedule — карточка расписания 320×300. */
+  body { width: 320px; height: 100px; position: relative; }
+  body.tall { height: 300px; }
+  .frame { inset: 8px; --r: 22px; --ring: 3px; filter: drop-shadow(0 0 6px rgba(255,121,198,.5)); }
+  .frame .fill { background: linear-gradient(135deg, #3a1d60, #1c0e34 70%); backdrop-filter: none; }
+  .frame .corner { width: 16px; height: 16px; }
+  .frame .corner.tl { left: -5px; top: -5px; }
+  .frame .corner.br { right: -5px; bottom: -5px; }
+  .row { position: absolute; inset: 8px; display: flex; align-items: center; gap: 16px; padding: 0 22px; }
+  .badge {
+    flex: none; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--pink), var(--lilac));
+    box-shadow: 0 0 16px rgba(255,121,198,.6), inset 0 0 0 2px rgba(255,245,251,.5);
+  }
+  .badge [data-icon], .badge svg { width: 28px; height: 28px; color: #fff; }
+  .title { max-width: 150px; white-space: nowrap; font-family: var(--font-head); font-weight: 700; font-size: 27px; letter-spacing: .02em; text-shadow: 0 0 14px rgba(255,121,198,.5); }
+  .wings { position: absolute; right: 16px; top: 50%; width: 48px; transform: translateY(-50%); opacity: .9; }
+  .wings .wing, .wings .core { animation: none; }
+  .dots i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--cream); box-shadow: 0 0 6px var(--rose); }
+
+  .sched { position: absolute; inset: 8px; padding: 22px 24px; }
+  .sched h2 { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-size: 24px; color: var(--rose); letter-spacing: .08em; margin-bottom: 14px; }
+  .sched h2 .spark { width: 16px; height: 16px; color: var(--gold); }
+  .sched li { list-style: none; display: grid; grid-template-columns: 38px 64px 1fr; align-items: baseline; padding: 8px 0; border-top: 1px dashed rgba(180,155,255,.25); font-size: 17px; }
+  .sched li .d { font-family: var(--font-head); font-weight: 700; color: var(--pink); }
+  .sched li .t { font-weight: 900; }
+  .sched li .w { color: rgba(255,245,251,.75); font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="fill"></div>
+    <div class="ring"></div>
+    <span class="corner tl spark"></span><span class="corner br spark"></span>
+  </div>
+  <div id="root"></div>
+
+  <script src="../config.js"></script>
+  <script>
+    const C = window.PIXIE_CONFIG, Q = new URLSearchParams(location.search), root = document.getElementById('root');
+    if (Q.has('schedule')) {
+      document.body.classList.add('tall');
+      root.innerHTML = `<div class="sched"><h2><span class="spark"></span>расписание</h2><ul>${
+        C.schedule.map((s) => `<li><span class="d">${s.day}</span><span class="t">${s.time}</span><span class="w">${s.what}</span></li>`).join('')
+      }</ul></div>`;
+    } else {
+      const p = C.panels[Number(Q.get('i') || 0)] || C.panels[0];
+      root.innerHTML = `<div class="row"><span class="badge" data-icon="${p.icon}"></span><span class="title">${p.title}</span></div>
+        <div class="wings"></div>
+        <div class="dots"><i style="left:150px;top:22px"></i><i style="left:200px;top:76px"></i><i style="left:236px;top:30px"></i></div>`;
+      // длинный заголовок уменьшаем, чтобы не наезжал на крылышки
+      const fit = () => {
+        const t = root.querySelector('.title'); let s = 27; t.style.fontSize = s + 'px';
+        while (t.scrollWidth > t.clientWidth && s > 16) t.style.fontSize = (s -= 1) + 'px';
+      };
+      fit(); document.fonts.ready.then(fit);
+    }
+  </script>
+  <script src="../assets/pixie.js"></script>
+</body>
+</html>

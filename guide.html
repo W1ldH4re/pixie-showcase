@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixie · Инструкция для OBS</title>
+<link rel="stylesheet" href="assets/pixie.css">
+<style>
+  html, body { overflow: auto; height: auto; }
+  body { background: var(--deep); min-height: 100vh; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 40px 24px 80px; position: relative; }
+  .bg { position: fixed; inset: 0; z-index: -1; }
+  header { display: flex; align-items: center; gap: 18px; margin-bottom: 8px; flex-wrap: wrap; }
+  header .wings { width: 90px; }
+  header .logo { font-size: 72px; }
+  .lead { font-size: 19px; max-width: 760px; color: rgba(255,245,251,.78); margin-bottom: 40px; line-height: 1.5; }
+  h2 { font-family: var(--font-head); font-size: 28px; color: var(--rose); margin: 48px 0 18px; display: flex; gap: 12px; align-items: center; }
+  h2 .spark { width: 20px; height: 20px; color: var(--gold); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 22px; }
+  .grid.wide { grid-template-columns: repeat(auto-fill, minmax(520px, 1fr)); }
+  .card { background: rgba(31,16,56,.7); border: 1px solid rgba(180,155,255,.22); border-radius: 22px; overflow: hidden; }
+  .card .meta { padding: 16px 20px 18px; }
+  .card h3 { font-family: var(--font-head); font-size: 20px; margin-bottom: 6px; }
+  .card p { font-size: 15px; color: rgba(255,245,251,.7); line-height: 1.45; }
+  .card code { font-size: 13px; background: rgba(255,121,198,.12); color: var(--rose); padding: 2px 7px; border-radius: 6px; }
+  .card a { color: var(--mint); font-weight: 800; font-size: 14px; text-decoration: none; }
+  .pv { position: relative; overflow: hidden; background: #0b0518; }
+  .pv iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; pointer-events: none; }
+  .pv.game { background:
+      radial-gradient(400px 160px at 70% 30%, rgba(255,255,255,.35), transparent),
+      linear-gradient(180deg, #4f8fc9 0%, #a6d2ee 52%, #5d8d47 53%, #2c552a 100%); }
+  .pv .fakecam { position: absolute; background: linear-gradient(160deg, #d9b3c6, #7a5470); }
+  .pv.cam { background: transparent; }
+  .panels { display: flex; flex-wrap: wrap; gap: 14px; padding: 18px; }
+  .panels img { width: 320px; max-width: 100%; display: block; }
+  ol { padding-left: 22px; line-height: 1.7; color: rgba(255,245,251,.85); font-size: 16px; }
+  ol b { color: var(--rose); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  td, th { text-align: left; padding: 9px 12px; border-top: 1px solid rgba(180,155,255,.18); }
+  th { color: var(--lilac); font-family: var(--font-head); }
+  .swatches { display: flex; flex-wrap: wrap; gap: 14px; }
+  .sw { width: 120px; }
+  .sw i { display: block; height: 70px; border-radius: 16px; box-shadow: 0 0 20px rgba(0,0,0,.3) inset; }
+  .sw span { display: block; font-size: 13px; margin-top: 6px; color: rgba(255,245,251,.75); }
+  @media (max-width: 600px) { .grid, .grid.wide { grid-template-columns: 1fr; } header .logo { font-size: 54px; } }
+</style>
+</head>
+<body>
+  <canvas class="sparkles bg" data-density="0.00006"></canvas>
+  <div class="wrap">
+    <p style="margin-bottom:18px"><a href="index.html" style="color:var(--mint);font-weight:800;text-decoration:none">← к презентации</a></p>
+    <header><div class="wings"></div><div class="logo" data-c="name">Pixie</div></header>
+    <p class="lead">Оформление стрима «волшебный ночной лес»: розово-сиреневые крылышки, светящиеся грибочки и летающая пыльца. Всё анимированное и подключается в OBS как «Браузер». Тексты, ник и соцсети меняются в одном файле — <code>config.js</code>.</p>
+
+    <h2><span class="spark"></span>Сцены</h2>
+    <div class="grid wide">
+      <div class="card"><div class="pv" data-src="scenes/starting.html" data-w="1920" data-h="1080"></div>
+        <div class="meta"><h3>Скоро начнём</h3><p><code>scenes/starting.html</code> · 1920×1080 · таймер: <code>?minutes=10</code> или <code>?until=19:00</code></p></div></div>
+      <div class="card"><div class="pv" data-src="scenes/chatting.html" data-w="1920" data-h="1080"></div>
+        <div class="meta"><h3>Просто общение</h3><p><code>scenes/chatting.html</code> · вебка 1240×698 в точке (76, 156), чат 420×600 в точке (1400, 230)</p></div></div>
+      <div class="card"><div class="pv" data-src="scenes/brb.html" data-w="1920" data-h="1080"></div>
+        <div class="meta"><h3>Скоро вернусь</h3><p><code>scenes/brb.html</code> · 1920×1080 · по экрану летает огонёк-фея</p></div></div>
+      <div class="card"><div class="pv" data-src="scenes/ending.html" data-w="1920" data-h="1080"></div>
+        <div class="meta"><h3>Спасибо за стрим</h3><p><code>scenes/ending.html</code> · 1920×1080 · дата следующего стрима из <code>config.js</code></p></div></div>
+    </div>
+
+    <h2><span class="spark"></span>Оверлеи (прозрачные)</h2>
+    <div class="grid wide">
+      <div class="card"><div class="pv game" data-src="overlays/game.html" data-w="1920" data-h="1080" data-cam="46,719,560,315"></div>
+        <div class="meta"><h3>Игровой оверлей</h3><p><code>overlays/game.html</code> · 1920×1080 поверх игры · вебка 560×315 в точке (46, 719)</p></div></div>
+      <div class="card"><div class="pv cam" data-src="overlays/webcam.html" data-w="720" data-h="470" data-cam="40,70,640,360"></div>
+        <div class="meta"><h3>Рамка для вебки</h3><p><code>overlays/webcam.html</code> · источник 720×470 для вебки 640×360 (отступы: 70 сверху, 40 по бокам и снизу)</p></div></div>
+      <div class="card"><div class="pv game" data-src="alerts/alert.html" data-w="1000" data-h="700"></div>
+        <div class="meta"><h3>Алерты</h3><p><code>alerts/alert.html</code> · 1000×700 · фолловер, саб, донат, рейд. Без параметров крутится демо. <a href="alerts/alert.html" target="_blank">открыть ↗</a></p></div></div>
+    </div>
+
+    <h2><span class="spark"></span>Для канала Twitch</h2>
+    <div class="grid wide">
+      <div class="card"><div class="pv" data-src="panels/banner.html" data-w="1200" data-h="480"></div>
+        <div class="meta"><h3>Баннер профиля</h3><p><code>export/profile-banner.png</code> · 1200×480 (сохранён в двойном размере)</p></div></div>
+      <div class="card"><div class="panels" id="panels"></div>
+        <div class="meta"><h3>Панели под стримом</h3><p>Картинки в папке <code>export/</code>. После правок в <code>config.js</code> пересобрать: <code>export.ps1</code></p></div></div>
+    </div>
+
+    <h2><span class="spark"></span>Как подключить в OBS</h2>
+    <div class="card"><div class="meta">
+      <ol>
+        <li>В сцене нажми <b>+</b> → <b>Браузер</b>, поставь галочку <b>«Локальный файл»</b> и выбери нужный <code>.html</code>.</li>
+        <li>Задай ширину и высоту как в таблице ниже. Для параметров вроде <code>?minutes=10</code> сними галочку «Локальный файл» и вставь адрес вида <code>file:///D:/Develop/PixieDesign/scenes/starting.html?minutes=10</code>.</li>
+        <li>Прозрачные оверлеи ставь <b>выше</b> захвата игры, вебку — <b>ниже</b> рамки, на координаты из таблицы.</li>
+        <li>Для виджетов чата и алертов от StreamElements или Streamlabs: виджет чата ставь в окно «чат» сцены «Просто общение», а алерты Пикси можно взять как свой браузер-источник.</li>
+        <li>Если поменяла <code>config.js</code> — в свойствах источника нажми <b>«Обновить кэш текущей страницы»</b>.</li>
+      </ol>
+    </div></div>
+    <div class="card" style="margin-top:18px"><div class="meta">
+      <table>
+        <tr><th>Файл</th><th>Размер источника</th><th>Где камера</th></tr>
+        <tr><td><code>scenes/starting.html</code>, <code>brb.html</code>, <code>ending.html</code></td><td>1920×1080</td><td>—</td></tr>
+        <tr><td><code>scenes/chatting.html</code></td><td>1920×1080</td><td>1240×698 · x 76, y 156</td></tr>
+        <tr><td><code>overlays/game.html</code></td><td>1920×1080</td><td>560×315 · x 46, y 719</td></tr>
+        <tr><td><code>overlays/webcam.html</code></td><td>вебка + 80 по ширине, +110 по высоте</td><td>отступ 40 слева, 70 сверху</td></tr>
+        <tr><td><code>alerts/alert.html</code></td><td>1000×700</td><td>—</td></tr>
+      </table>
+    </div></div>
+
+    <h2><span class="spark"></span>Палитра</h2>
+    <div class="swatches" id="swatches"></div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="assets/pixie.js"></script>
+  <script>
+    document.querySelectorAll('.pv').forEach((pv) => {
+      const w = +pv.dataset.w, h = +pv.dataset.h;
+      pv.style.aspectRatio = w + ' / ' + h;
+      if (pv.dataset.cam) {
+        const [x, y, cw, ch] = pv.dataset.cam.split(',').map(Number);
+        const cam = document.createElement('div'); cam.className = 'fakecam';
+        Object.assign(cam.style, { left: x / w * 100 + '%', top: y / h * 100 + '%', width: cw / w * 100 + '%', height: ch / h * 100 + '%' });
+        pv.appendChild(cam);
+      }
+      const f = document.createElement('iframe');
+      f.src = pv.dataset.src; f.width = w; f.height = h; f.loading = 'lazy'; f.tabIndex = -1;
+      f.setAttribute('allowtransparency', 'true'); f.style.background = 'transparent';
+      pv.appendChild(f);
+      new ResizeObserver(() => { f.style.transform = `scale(${pv.clientWidth / w})`; }).observe(pv);
+    });
+
+    const names = ['about', 'schedule', 'rules', 'support', 'socials', 'setup'];
+    document.getElementById('panels').innerHTML =
+      names.map((n, i) => `<img src="export/panel-${i + 1}-${n}.png" alt="панель ${n}">`).join('') +
+      '<img src="export/panel-schedule-card.png" alt="расписание">';
+
+    const sw = [['#ff79c6', 'pink · главный'], ['#ffb8e0', 'rose'], ['#b49bff', 'lilac'], ['#7cf0d4', 'mint'], ['#ffd98a', 'gold · искры'], ['#341a57', 'plum'], ['#140a26', 'night · фон']];
+    document.getElementById('swatches').innerHTML = sw.map(([c, n]) => `<div class="sw"><i style="background:${c}"></i><span>${c} · ${n}</span></div>`).join('');
+  </script>
+</body>
+</html>

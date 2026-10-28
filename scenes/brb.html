@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Pixie · Скоро вернусь</title>
+<link rel="stylesheet" href="../assets/pixie.css">
+<style>
+  .stage { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 140px; text-align: center; z-index: 2; }
+  .stage .kicker { font-size: 40px; }
+  .stage .title { font-family: var(--font-logo); font-size: 170px; margin-top: 4px; }
+  .msg { margin-top: 30px; font-size: 38px; font-weight: 800; min-height: 1.4em; }
+  .clock { margin-top: 40px; font-size: 30px; }
+  .clock b { font-family: var(--font-head); font-size: 36px; }
+  /* светлячок-фея летает восьмёркой и оставляет след */
+  #fairy { position: absolute; inset: 0; z-index: 1; }
+</style>
+</head>
+<body class="scene">
+  <div class="sky"><div class="aurora"></div></div>
+  <div class="moon" style="top:110px; left:200px"></div>
+  <canvas class="sparkles" data-density="0.0001"></canvas>
+  <canvas id="fairy"></canvas>
+  <div class="forest"></div>
+
+  <main class="stage">
+    <div class="kicker">небольшой перерыв</div>
+    <div class="title logo">скоро вернусь</div>
+    <div class="msg muted" data-rotate="brbMessages"></div>
+    <div class="pill clock"><span class="spark"></span><span class="lbl">сейчас</span><b data-clock></b></div>
+  </main>
+
+  <script src="../config.js"></script>
+  <script src="../assets/pixie.js"></script>
+  <script>
+    (function () {
+      const cv = document.getElementById('fairy'), ctx = cv.getContext('2d');
+      const W = cv.width = 1920, H = cv.height = 1080;
+      const trail = [];
+      let t = 0;
+      function frame() {
+        t += 0.006;
+        // восьмёрка вокруг надписи
+        const x = W / 2 + Math.sin(t) * 760;
+        const y = 470 + Math.sin(t * 2) * 300 + Math.sin(t * 5) * 18;
+        trail.push({ x, y, life: 1, r: 4 + Math.random() * 5, dx: (Math.random() - .5) * .8, dy: Math.random() * .9 + .2,
+          c: Pixie.PALETTE[(Math.random() * 5) | 0] });
+        ctx.clearRect(0, 0, W, H);
+        ctx.globalCompositeOperation = 'lighter';
+        for (let i = trail.length - 1; i >= 0; i--) {
+          const p = trail[i]; p.life -= .012; p.x += p.dx; p.y += p.dy;
+          if (p.life <= 0) { trail.splice(i, 1); continue; }
+          ctx.globalAlpha = p.life * .8;
+          ctx.fillStyle = p.c;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r * p.life, 0, 7); ctx.fill();
+        }
+        const g = ctx.createRadialGradient(x, y, 0, x, y, 70);
+        g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(.15, 'rgba(255,184,224,.9)');
+        g.addColorStop(.45, 'rgba(255,121,198,.25)'); g.addColorStop(1, 'rgba(255,121,198,0)');
+        ctx.globalAlpha = 1; ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(x, y, 70, 0, 7); ctx.fill();
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Pixie · Баннер профиля</title>
+<link rel="stylesheet" href="../assets/pixie.css">
+<style>
+  /* Баннер профиля Twitch 1200×480 */
+  body { width: 1200px; height: 480px; position: relative; background: var(--night); }
+  .forest { height: 130px; }
+  .moon { width: 90px; height: 90px; box-shadow: inset -20px 8px 0 0 #ffe9bf; top: 50px; right: 120px; }
+  .stage { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 90px; }
+  .stage .wings { width: 150px; margin-bottom: -26px; }
+  .stage .logo { font-size: 130px; }
+  .stage .kicker { font-size: 26px; margin-top: -6px; }
+</style>
+</head>
+<body>
+  <div class="sky"><div class="aurora"></div></div>
+  <div class="moon"></div>
+  <canvas class="sparkles" data-density="0.00022" data-scale="0.8"></canvas>
+  <div class="forest"></div>
+  <main class="stage">
+    <div class="wings"></div>
+    <div class="logo" data-c="name">Pixie</div>
+    <div class="kicker" data-c="tagline"></div>
+  </main>
+  <script src="../config.js"></script>
+  <script src="../assets/pixie.js"></script>
+</body>
+</html>

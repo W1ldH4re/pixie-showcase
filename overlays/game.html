@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Pixie · Игровой оверлей</title>
+<link rel="stylesheet" href="../assets/pixie.css">
+<style>
+  /* Прозрачный оверлей 1920×1080 поверх захвата игры.
+     Вебка: 560×315, левый нижний угол — x 46, y 719 (поставь источник камеры туда). */
+  body { width: 1920px; height: 1080px; position: relative; }
+  .cam { left: 40px; top: 713px; width: 572px; height: 327px; }
+  .cam .wings { width: 120px; }
+  canvas.sparkles.cam-dust { position: absolute; inset: auto; left: 0; top: 560px; width: 760px; height: 520px; }
+  .info { position: absolute; left: 650px; bottom: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; font-size: 22px; }
+  .info .pill { padding: .45em 1.1em; }
+  .info [data-icon] { width: 22px; height: 22px; color: var(--pink); }
+  .info .sub [data-icon] { color: var(--lilac); }
+  .info .don [data-icon] { color: var(--gold); }
+</style>
+</head>
+<body>
+  <canvas class="sparkles cam-dust" data-density="0.00012" data-scale="0.8"></canvas>
+
+  <div class="frame cam">
+    <div class="inner-glow"></div>
+    <div class="ring"></div>
+    <span class="corner tl spark"></span><span class="corner tr spark"></span>
+    <span class="corner bl spark"></span><span class="corner br spark"></span>
+    <div class="wings"></div>
+  </div>
+
+  <div class="info">
+    <span class="pill"><span data-icon="heart"></span><span class="lbl">фолловер</span><b data-c="latest.follower"></b></span>
+    <span class="pill sub"><span data-icon="star"></span><span class="lbl">саб</span><b data-c="latest.sub"></b></span>
+    <span class="pill don"><span data-icon="gift"></span><span class="lbl">донат</span><b data-c="latest.donate"></b></span>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../assets/pixie.js"></script>
+</body>
+</html>

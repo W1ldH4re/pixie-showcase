@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Pixie · Спасибо за стрим</title>
+<link rel="stylesheet" href="../assets/pixie.css">
+<style>
+  .stage { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 150px; text-align: center; }
+  .stage .wings { width: 200px; margin-bottom: 6px; animation: floaty 5s ease-in-out infinite; }
+  .stage .kicker { font-size: 40px; }
+  .stage .title { font-family: var(--font-logo); font-size: 150px; margin-top: 6px; }
+  .msg { margin-top: 20px; font-size: 38px; font-weight: 800; min-height: 1.4em; }
+  .next { margin-top: 48px; font-size: 34px; padding: .5em 1.4em; }
+  .next b { font-family: var(--font-head); }
+  .socials { position: absolute; left: 0; right: 0; bottom: 64px; z-index: 2; }
+</style>
+</head>
+<body class="scene">
+  <div class="sky"><div class="aurora"></div></div>
+  <div class="moon" style="top:80px; right:240px"></div>
+  <canvas class="sparkles" data-density="0.00016" data-rise="0.6"></canvas>
+  <div class="forest"></div>
+
+  <main class="stage">
+    <div class="wings"></div>
+    <div class="kicker">стрим окончен</div>
+    <div class="title logo">спасибо!</div>
+    <div class="msg muted" data-rotate="endingMessages"></div>
+    <div class="pill next"><span class="spark"></span><span class="lbl">следующий стрим</span><b data-c="nextStream"></b></div>
+  </main>
+
+  <div class="socials" data-socials></div>
+
+  <script src="../config.js"></script>
+  <script src="../assets/pixie.js"></script>
+</body>
+</html>
