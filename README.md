@@ -23,4 +23,6 @@
 powershell -ExecutionPolicy Bypass -File export.ps1
 ```
 
-Нужен интернет: шрифты (Pacifico, Comfortaa, Nunito) грузятся с Google Fonts.
+Шрифты (Pacifico, Comfortaa, Nunito) лежат в `assets/fonts`, интернет для них не нужен.
+
+Сайт: https://w1ldh4re.github.io/pixie-showcase/ (запасной адрес: https://pixie-showcase.vercel.app)

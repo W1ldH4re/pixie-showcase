@@ -1,0 +1,6 @@
+Шрифты Pacifico, Comfortaa и Nunito распространяются по лицензии SIL Open Font License 1.1:
+https://openfontlicense.org
+
+Pacifico  © The Pacifico Project Authors   https://github.com/googlefonts/Pacifico
+Comfortaa © The Comfortaa Project Authors  https://github.com/googlefonts/comfortaa
+Nunito    © The Nunito Project Authors     https://github.com/googlefonts/nunito
